@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { 
+      width: 350px; 
+      padding: 15px; 
+      font-family: Arial, sans-serif; 
+      margin: 0;
+    }
+    .section { 
+      margin-bottom: 15px; 
+      padding: 10px; 
+      border: 1px solid #ddd; 
+      border-radius: 5px;
+    }
+    .section h3 { 
+      margin: 0 0 10px 0; 
+      color: #2e7d32;
+    }
+    input, button { 
+      width: 100%; 
+      padding: 8px; 
+      margin: 5px 0; 
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    button { 
+      background: #4caf50; 
+      color: white; 
+      border: none; 
+      cursor: pointer;
+    }
+    button:hover { 
+      background: #45a049; 
+    }
+    button:disabled { 
+      background: #ccc; 
+      cursor: not-allowed; 
+    }
+    .balance { 
+      font-size: 18px; 
+      font-weight: bold; 
+      color: #2e7d32;
+      text-align: center;
+      padding: 10px;
+      background: #e8f5e8;
+      border-radius: 5px;
+    }
+    .error { 
+      color: #d32f2f; 
+      font-size: 14px; 
+      text-align: center;
+    }
+    .success { 
+      color: #2e7d32; 
+      font-size: 14px; 
+      text-align: center;
+    }
+    small { 
+      color: #666; 
+      font-size: 12px; 
+      display: block; 
+      margin-top: 5px; 
+    }
+  </style>
+</head>
+<body>
+  <div class="section">
+    <h3>🌱 Green Points</h3>
+    <input type="text" id="adminAddr" placeholder="Admin Address" 
+           value="0x81016bf623696dee3897ac2e423813a6657b3b7ca004c0c16bac663291da2ec3">
+    <input type="text" id="studentAddr" placeholder="Student Address"
+           value="0x7ac9d4dd56d3e00eec939edbb2ad1a6b33925ddc7461e7dd298711613dede91b">
+    <div id="pageInfo" style="font-size: 12px; color: #666; margin-top: 5px;"></div>
+  </div>
+
+  <div class="section">
+    <h3>💰 Balance</h3>
+    <button id="checkBalance">Check Balance</button>
+    <div class="balance" id="balanceDisplay">--</div>
+  </div>
+
+  <div class="section">
+    <h3>🎁 Award Points</h3>
+    <input type="number" id="awardAmount" placeholder="Amount" value="100">
+    <button id="awardBtn">Award Points *</button>
+    <small>* Requires Petra wallet</small>
+  </div>
+
+  <div class="section">
+    <h3>🔥 Redeem Points</h3>
+    <input type="number" id="redeemAmount" placeholder="Amount" value="50">
+    <button id="redeemBtn">Redeem Points *</button>
+    <small>* Requires Petra wallet</small>
+  </div>
+
+  <div id="status"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

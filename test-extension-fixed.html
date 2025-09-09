@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Green Points Extension Test - Fixed</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .status { padding: 15px; margin: 10px 0; border-radius: 5px; }
+        .success { background: #e8f5e8; border-left: 4px solid #4caf50; }
+        .info { background: #e3f2fd; border-left: 4px solid #2196f3; }
+        .warning { background: #fff3e0; border-left: 4px solid #ff9800; }
+    </style>
+</head>
+<body>
+    <h1>🌱 Green Points Extension - Fixed Version</h1>
+    
+    <div class="status success">
+        <h3>✅ Extension Fixed!</h3>
+        <p><strong>Changes made:</strong></p>
+        <ul>
+            <li>Content script now runs on document_idle instead of document_start</li>
+            <li>Added fallback for direct balance checking when content script fails</li>
+            <li>Better error messages for unsupported pages</li>
+            <li>Page compatibility detection in popup</li>
+        </ul>
+    </div>
+
+    <div class="status info">
+        <h3>🔧 Test Instructions</h3>
+        <ol>
+            <li><strong>Reload the extension:</strong> Go to chrome://extensions/ and click reload ⟳</li>
+            <li><strong>Test on this page:</strong> Click the extension icon and try "Check Balance"</li>
+            <li><strong>Test on other pages:</strong> Try on regular websites for full functionality</li>
+        </ol>
+    </div>
+
+    <div class="status warning">
+        <h3>📋 Expected Behavior</h3>
+        <ul>
+            <li><strong>Balance Check:</strong> Should work on all pages (including this one)</li>
+            <li><strong>Award/Redeem:</strong> Requires regular websites + Petra wallet</li>
+            <li><strong>Page Status:</strong> Extension shows compatibility info</li>
+        </ul>
+    </div>
+
+    <script>
+        console.log('Green Points Test Page: Fixed version loaded');
+        console.log('Current URL:', window.location.href);
+        
+        // Test if extension can access this page
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'EXTENSION_MESSAGE') {
+                console.log('✅ Extension message received:', event.data);
+            }
+        });
+    </script>
+</body>
+</html>
