@@ -1,0 +1,16 @@
+[package]
+name = "Greenn"
+version = "1.0.0"
+authors = []
+
+[addresses]
+Greenn = "0x81016bf623696dee3897ac2e423813a6657b3b7ca004c0c16bac663291da2ec3"
+
+[dev-addresses]
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-framework.git"
+rev = "mainnet"
+subdir = "aptos-framework"
+
+[dev-dependencies]
