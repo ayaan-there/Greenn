@@ -4,8 +4,9 @@
   "version": "1.0",
   "description": "Manage Green Points on Aptos blockchain",
   "permissions": [
-    "activeTab",
-    "storage"
+  "activeTab",
+  "storage",
+  "scripting"
   ],
   "host_permissions": [
     "https://*/*",

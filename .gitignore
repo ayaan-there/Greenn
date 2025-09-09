@@ -1,19 +1,34 @@
 # Aptos build artifacts
 .aptos/
 build/
+.movement/
+
+# Move compilation outputs  
+*.mv
+*.mvsm
+bytecode_modules/
+source_maps/
+BuildInfo.yaml
 
 # Node.js dependencies
-node_modules/*
+node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 package-lock.json
 yarn.lock
+.npm
 
 # TypeScript build outputs
 dist/
 *.tsbuildinfo
 *.d.ts.map
+
+# Chrome extension development
+extension/build/
+extension/dist/
+*.crx
+*.pem
 
 # IDE and editor files
 .vscode/
@@ -21,6 +36,8 @@ dist/
 *.swp
 *.swo
 *~
+*.sublime-project
+*.sublime-workspace
 
 # OS generated files
 .DS_Store
@@ -30,17 +47,89 @@ dist/
 .Trashes
 ehthumbs.db
 Thumbs.db
+desktop.ini
 
-# Environment variables
+# Environment variables and config
 .env
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+config.yaml
+.aptos/config.yaml
 
 # Logs
 *.log
+logs/
 
 # Temporary files
 tmp/
 temp/
+.cache/
+
+# Testing
+coverage/
+.nyc_output/
+
+# Documentation build
+docs/_build/
+*.epub
+*.pdf
+
+# Private keys and credentials (NEVER commit these!)
+*.priv
+*.pem
+private_key*
+seed_phrase*
+mnemonic*
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Archive files
+*.tar.gz
+*.zip
+*.rar
+
+# Development database files
+*.sqlite
+*.db
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+lib-cov/
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Output of 'npm pack'
+*.tgz
+
+# Optional REPL history
+.node_repl_history
+
+# Output of Webpack
+webpack-stats.json
+
+# Jetbrains IDEs
+.idea/
+*.iml
+*.iws
+
+# README backup created during audit
+README_OLD.md

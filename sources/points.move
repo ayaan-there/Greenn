@@ -21,6 +21,7 @@ module Greenn::green_points {
 
     const E_NOT_ADMIN: u64 = 1;
     const E_NOT_MERCHANT: u64 = 2;
+    const E_INVALID_AMOUNT: u64 = 3;
 
     fun assert_admin(addr: address) {
         if (!exists<Admin>(addr)) { abort E_NOT_ADMIN }
@@ -69,12 +70,17 @@ module Greenn::green_points {
         assert_admin(admin_addr);
 
         let a = borrow_global_mut<Admin>(admin_addr);
-        let already = table::contains(&a.merchants, merchant_addr);
         if (approved) {
-            if (already) { table::remove(&mut a.merchants, merchant_addr); };
+            // Use upsert pattern: remove if exists, then add
+            if (table::contains(&a.merchants, merchant_addr)) {
+                table::remove(&mut a.merchants, merchant_addr);
+            };
             table::add(&mut a.merchants, merchant_addr, true);
         } else {
-            if (already) { table::remove(&mut a.merchants, merchant_addr); };
+            // Remove if exists (disapprove merchant)
+            if (table::contains(&a.merchants, merchant_addr)) {
+                table::remove(&mut a.merchants, merchant_addr);
+            };
         }
     }
 
@@ -85,12 +91,13 @@ module Greenn::green_points {
     ) acquires Admin {
         let admin_addr = signer::address_of(admin);
         assert_admin(admin_addr);
+        assert!(amount > 0, 3); // E_INVALID_AMOUNT
         let a = borrow_global<Admin>(admin_addr);
 
         let coins = coin::mint<GreenPoints>(amount, &a.mint_cap);
         coin::deposit<GreenPoints>(to_addr, coins);
 
-        0x1::event::emit(AwardedEvent { to: to_addr, amount }); // modern module events  [oai_citation:3‡aptos.dev](https://aptos.dev/network/blockchain/events?utm_source=chatgpt.com)
+        0x1::event::emit(AwardedEvent { to: to_addr, amount });
     }
 
     public entry fun redeem_from(
@@ -103,6 +110,7 @@ module Greenn::green_points {
         if (!is_merchant(admin_addr, merchant_addr) && merchant_addr != admin_addr) {
             abort E_NOT_MERCHANT
         };
+        assert!(amount > 0, E_INVALID_AMOUNT);
         let a = borrow_global<Admin>(admin_addr);
         coin::burn_from<GreenPoints>(user_addr, amount, &a.burn_cap);
 
@@ -118,6 +126,7 @@ module Greenn::green_points {
         if (!is_merchant(admin_addr, caller_addr) && caller_addr != admin_addr) {
             abort E_NOT_MERCHANT
         };
+        assert!(amount > 0, E_INVALID_AMOUNT);
         let a = borrow_global<Admin>(admin_addr);
         coin::burn_from<GreenPoints>(caller_addr, amount, &a.burn_cap);
 

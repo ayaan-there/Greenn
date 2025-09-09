@@ -39,7 +39,7 @@ export async function getGpntBalance(
         // User not registered or no balance
         return {
           balance: 0,
-          formatted: '0.00 GPNT'
+        formatted: '0 GPNT'
         };
       }
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -48,18 +48,18 @@ export async function getGpntBalance(
     const data: CoinStoreResource = await response.json();
     const rawBalance = parseInt(data.data.coin.value);
     
-    // Convert from smallest units (8 decimals)
-    const balance = rawBalance / Math.pow(10, 8);
+    // Convert from smallest units (decimals from CoinInfo)
+    const balance = rawBalance / Math.pow(10, 0); // GPNT has 0 decimals
 
     return {
       balance,
-      formatted: `${balance.toFixed(2)} GPNT`
+      formatted: `${balance} GPNT`
     };
   } catch (error) {
     console.error('Error fetching balance:', error);
     return {
       balance: 0,
-      formatted: '0.00 GPNT'
+      formatted: '0 GPNT'
     };
   }
 }

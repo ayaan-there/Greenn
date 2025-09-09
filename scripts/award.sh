@@ -6,8 +6,12 @@ STUDENT_ADDR=${STUDENT:-0x7ac9d4dd56d3e00eec939edbb2ad1a6b33925ddc7461e7dd298711
 AMOUNT=${1:-100}
 
 echo "💰 Awarding ${AMOUNT} Green Points to student..."
+# This transaction must be signed by the admin.
+# We use the 'default' profile.
 aptos move run \
-  --function-id ${ADMIN_ADDR}::green_points::award \
-  --args address:${STUDENT_ADDR} u64:${AMOUNT} \
+  --function-id "${ADMIN_ADDR}::green_points::award" \
+  --args "address:${STUDENT_ADDR}" "u64:${AMOUNT}" \
+  --profile default \
   --assume-yes
+
 echo "✅ Awarded ${AMOUNT} Green Points successfully"

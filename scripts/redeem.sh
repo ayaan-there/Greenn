@@ -7,8 +7,12 @@ CAFE_ADDR=${CAFE:-$ADMIN_ADDR}
 AMOUNT=${1:-50}
 
 echo "🔥 Redeeming ${AMOUNT} Green Points from student..."
+# This transaction must be signed by the cafe/merchant (or admin).
+# We use the 'default' profile, assuming the admin is the merchant.
 aptos move run \
-  --function-id ${ADMIN_ADDR}::green_points::redeem_from \
-  --args address:${ADMIN_ADDR} address:${STUDENT_ADDR} u64:${AMOUNT} \
+  --function-id "${ADMIN_ADDR}::green_points::redeem_from" \
+  --args "address:${ADMIN_ADDR}" "address:${STUDENT_ADDR}" "u64:${AMOUNT}" \
+  --profile default \
   --assume-yes
+
 echo "✅ Redeemed ${AMOUNT} Green Points successfully"

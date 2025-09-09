@@ -4,6 +4,18 @@
 
   console.log('Green Points: Content script loaded');
 
+  // Only run in top frame to avoid duplicate prompts in iframes
+  if (window !== window.top) {
+    console.log('Green Points: Skipping content script in iframe');
+    return;
+  }
+
+  if (window.__GREEN_POINTS_CONTENT_READY__) {
+    console.log('Green Points: Content script already initialized');
+    return;
+  }
+  window.__GREEN_POINTS_CONTENT_READY__ = true;
+
   // Inject aptos-client.js into page context
   const script = document.createElement('script');
   script.src = chrome.runtime.getURL('aptos-client.js');
