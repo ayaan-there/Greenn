@@ -47,7 +47,7 @@ cd Greenn
 
 ```
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│  Chrome Ext.    │    │   Move Contract   │    │   CLI Scripts   │
+│  Chrome Ext.    │    │   Move Contract  │    │   CLI Scripts   │
 │                 │    │                  │    │                 │
 │  • Popup UI     │◄──►│  • GPNT Token    │◄──►│  • Deployment   │
 │  • Petra Bridge │    │  • Admin Logic   │    │  • Registration │
